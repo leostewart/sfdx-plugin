@@ -1,6 +1,7 @@
 import { SfdxCommand, flags } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
-import { AnyJson } from '@salesforce/ts-types';
+import { JsonCollection } from '@salesforce/ts-types';
+import { cli } from 'cli-ux';
 
 Messages.importMessagesDirectory(__dirname);
 
@@ -19,9 +20,12 @@ export default class Get extends SfdxCommand {
       description: MESSAGES.getMessage('fileidFlagDescription'),
       required: true,
     }),
+    csv: flags.boolean({
+      description: MESSAGES.getMessage('csvFlagDescription'),
+    }),
   };
 
-  public async run(): Promise<AnyJson> {
+  public async run(): Promise<JsonCollection> {
     this.ux.startSpinner(MESSAGES.getMessage('commandRunningMessage'));
 
     const conn = this.org.getConnection();
@@ -32,9 +36,17 @@ export default class Get extends SfdxCommand {
     // JSForce uses 'request' which supports automatic decoding
     const requestInfo = record['LogFileLength'] > ONE_HUNDRED_MB ? { url, gzip: true } : url;
 
-    const responseType = 'text'; // prevent JSForce from parsing response
-    const data: string = await conn.request(requestInfo, { responseType });
-    this.ux.log(data);
-    return { data };
+    const data = await conn.request(requestInfo);
+
+    // directly use cli-ux for its recent support for csv format
+    if (!this.flags.json) {
+      // create columns with uppercase headers from first data row; otherwise, columns are capitalized
+      const columns = Object.fromEntries(Object.entries(data[0]).map(([k]) => [k, { header: k.toUpperCase() }]));
+
+      // see https://oclif.io/docs/table
+      cli.table(data as Array<Record<string, string>>, columns, { csv: this.flags.csv as boolean });
+    }
+
+    return data;
   }
 }

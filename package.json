@@ -10,6 +10,7 @@
     "@oclif/errors": "^1",
     "@salesforce/command": "^3",
     "@salesforce/core": "^2",
+    "cli-ux": "^6.0.6",
     "tslib": "^2"
   },
   "devDependencies": {
@@ -64,8 +65,14 @@
     "commands": "./lib/commands",
     "bin": "sfdx",
     "topics": {
-      "hello": {
-        "description": "Commands to say hello."
+      "leo": {
+        "subtopics": {
+          "data": {
+            "subtopics": {
+              "eventlogfile": {}
+            }
+          }
+        }
       }
     },
     "devPlugins": [

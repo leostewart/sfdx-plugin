@@ -1,5 +1,6 @@
 {
     "commandDescription": "displays an EventLogFile\nSpecify the ID of the EventLogFile.\n",
     "fileidFlagDescription": "the ID of the EventLogFile record",
+    "csvFlagDescription": "whether to display the results in CSV format",
     "commandRunningMessage": "Retrieving file"
 }
