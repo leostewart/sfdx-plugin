@@ -40,7 +40,7 @@ export default class Get extends SfdxCommand {
 
     // directly use cli-ux for its recent support for csv format
     if (!this.flags.json) {
-      // create columns with uppercase headers from first data row; otherwise, columns are capitalized
+      // create columns with uppercase headers from first data row; otherwise, headers are capitalized
       const columns = Object.fromEntries(Object.entries(data[0]).map(([k]) => [k, { header: k.toUpperCase() }]));
 
       // see https://oclif.io/docs/table
