@@ -42,5 +42,5 @@ DESCRIPTION
   Specify the ID of the EventLogFile.
 ```
 
-_See code: [src/commands/leo/data/eventlogfile/get.ts](https://github.com/leostewart/sfdx-plugin/blob/v0.1.0/src/commands/leo/data/eventlogfile/get.ts)_
+_See code: [src/commands/leo/data/eventlogfile/get.ts](https://github.com/leostewart/sfdx-plugin/blob/main/src/commands/leo/data/eventlogfile/get.ts)_
 <!-- commandsstop -->
