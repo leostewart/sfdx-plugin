@@ -14,7 +14,7 @@ $ sfdx plugins:install https://github.com/leostewart/sfdx-plugin
   <!-- commands -->
 * [`sfdx leo:data:eventlogfile:get`](#sfdx-leodataeventlogfileget)
 
-## `sfdx leo:data:eventlogfile:get`
+### `sfdx leo:data:eventlogfile:get`
 
 displays an EventLogFile
 
